@@ -352,13 +352,17 @@
         }
 
         .portfolio-image {
-            height: 250px;
+            width: 100%;
+            aspect-ratio: 4 / 3; /* Or 16 / 9, adjust as needed */
+            overflow: hidden;
+            position: relative;
             background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            color: #666;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .portfolio-content {
@@ -617,7 +621,7 @@
                     <a href="https://linkedin.com/in/omerteomim" target="_blank" class="social-link">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="resume.pdf" target="_blank" class="social-link">
+                    <a href="./resume.pdf" target="_blank" class="social-link">
                         <i class="fas fa-file-alt"></i>
                     </a>
                     <a href="https://github.com/omerteomim" target="_blank" class="social-link">
