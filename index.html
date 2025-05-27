@@ -817,12 +817,48 @@
                     const message = document.getElementById('message').value;
                     
                     // Simple validation
-                    if (name && email && message) {
-                        alert('Thank you for your message, ' + name + '! I\'ll get back to you soon.');
-                        this.reset();
-                    } else {
+                
+                    if (!name || !email || !message) {
                         alert('Please fill in all fields.');
-                    }
+                    } 
+                    fetch('https://9r6h6hhuzk.execute-api.us-east-1.amazonaws.com/prod/Contact', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ name, email, message })
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            // Don't try to parse JSON if the response isn't ok
+            if (!response.ok) {
+                return response.text().then(text => {
+                    console.error('Error response body:', text);
+                    throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+                });
+            }
+            
+            // Try to parse as JSON, but handle cases where it might not be JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            console.log('Success response:', data);
+            alert('Thank you for your message, ' + name + '! I\'ll get back to you soon.');
+            contactForm.reset();
+        })
+        .catch(error => {
+            console.error('Full error details:', error);
+            alert('Sorry, there was an error sending your message. Please try again later.');
+        });
+                    
                 });
             }
 
