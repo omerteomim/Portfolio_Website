@@ -13,22 +13,25 @@
         }
         
         :root {
-            --primary-color: #417a9f;
-            --secondary-color: #2c3e50;
-            --accent-color: #2980b9;
-            --background-light: #f8f9fa;
-            --background-dark: #2c3e50;
-            --text-light: #f8f9fa;
-            --text-dark: #333;
-            --gray-blue: #6c7a89;
-            --light-blue: #a7c5eb;
+            --primary-color: #64b5f6;
+            --secondary-color: #1e293b;
+            --accent-color: #3b82f6;
+            --background-dark: #0f172a;
+            --background-card: #1e293b;
+            --background-hover: #334155;
+            --text-light: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
+            --gradient-primary: linear-gradient(135deg, #64b5f6 0%, #3b82f6 100%);
+            --gradient-card: linear-gradient(135deg, #1e293b 0%, #334155 100%);
         }
         
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
+            color: var(--text-light);
+            background: var(--background-dark);
         }
 
         .container {
@@ -39,13 +42,15 @@
 
         /* Header & Navigation */
         header {
-            background: white;
+            background: rgba(15, 23, 42, 0.95);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
             padding: 15px 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav {
@@ -62,13 +67,14 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--primary-color);
             line-height: 1;
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
         }
 
         .logo-subtitle {
             font-size: 1rem;
-            color: #6c7a89;
+            color: var(--text-secondary);
             font-weight: 400;
             margin-top: 5px;
         }
@@ -87,7 +93,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 1.1rem;
             transition: all 0.3s ease;
@@ -96,7 +102,7 @@
         }
 
         .nav-links a:hover {
-            color: #417a9f;
+            color: var(--primary-color);
         }
 
         .nav-links a::after {
@@ -106,20 +112,17 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: #417a9f;
+            background: var(--gradient-primary);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
         .nav-links a.active {
-            color: #417a9f;
-        }
-
-        .nav-links a.active::after {
-            width: 100%;
+            color: var(--primary-color);
         }
 
         .social-links {
@@ -128,7 +131,7 @@
         }
 
         .social-link {
-            color: #2c3e50;
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 1.2rem;
             width: 40px;
@@ -138,19 +141,21 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            background: rgba(65, 122, 159, 0.1);
+            background: rgba(100, 181, 246, 0.1);
+            border: 1px solid rgba(100, 181, 246, 0.2);
         }
 
         .social-link:hover {
-            background: #417a9f;
+            background: var(--gradient-primary);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(100, 181, 246, 0.3);
         }
 
         /* Light shade between nav and about */
         .nav-shade {
             height: 20px;
-            background: linear-gradient(180deg, rgba(65, 122, 159, 0.1) 0%, rgba(65, 122, 159, 0.05) 50%, transparent 100%);
+            background: linear-gradient(180deg, rgba(100, 181, 246, 0.05) 0%, rgba(100, 181, 246, 0.02) 50%, transparent 100%);
             margin-top: 80px;
         }
 
@@ -163,7 +168,7 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #2c3e50;
+            color: var(--text-light);
             position: relative;
         }
 
@@ -175,19 +180,19 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: linear-gradient(45deg, #417a9f, #2980b9);
+            background: var(--gradient-primary);
             border-radius: 2px;
         }
 
         /* About Section */
         .about {
-            background: white;
-            color: #333;
+            background: var(--background-dark);
+            color: var(--text-light);
         }
 
         .about .section-title {
-            color: #417a9f;
-            text-shadow: 1px 1px 3px rgba(65, 122, 159, 0.2);
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
         }
 
         .about-content {
@@ -202,38 +207,43 @@
             height: 400px;
             border-radius: 15px;
             object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .about-image:hover {
-            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(100, 181, 246, 0.2);
         }
 
         .about-text {
-            background: white;
+            background: var(--gradient-card);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .about-text:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border-color: var(--primary-color);
         }
 
         .about-text h3 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
-            color: #417a9f;
-            text-shadow: 1px 1px 2px rgba(65, 122, 159, 0.1);
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.2);
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             line-height: 1.7;
-            color: #555;
+            color: var(--text-secondary);
         }
 
-        /* Skills Section with Hover Effects */
+        /* Skills Section */
         .skills {
-            background: white;
+            background: rgba(30, 41, 59, 0.5);
         }
 
         .skills-grid {
@@ -243,39 +253,24 @@
         }
 
         .skill-category {
-            background: white;
+            background: var(--gradient-card);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
 
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(65, 122, 159, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .skill-category:hover::before {
-            left: 100%;
-        }
-
         .skill-category:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             border-color: var(--primary-color);
         }
 
         .skill-category h3 {
-            color: var(--secondary-color);
+            color: var(--primary-color);
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary-color);
@@ -286,116 +281,110 @@
         .skill-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            position: relative;
-            z-index: 1;
-        }
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            }
 
-        .skill-item {
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 0.7rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            .skill-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            transition: transform 0.3s ease, filter 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(65, 122, 159, 0.3);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(65, 122, 159, 0.4);
-        }
+            }
+            .skill-icon.aws {
+            filter: invert(1);
+            }
+            .skill-icon:hover {
+            transform: scale(1.1);
+            }
+            
 
         /* Portfolio Section */
         .portfolio {
-            background: #f8f9fa;
+            background: var(--background-dark);
         }
 
         .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .portfolio-item {
-            background: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
+            background: var(--gradient-card);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
             position: relative;
-        }
-
-        .portfolio-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(65, 122, 159, 0.1), transparent);
-            transition: left 0.5s ease;
-            z-index: 1;
-        }
-
-        .portfolio-item:hover::before {
-            left: 100%;
+            padding: 1rem;
         }
 
         .portfolio-item:hover {
             transform: translateY(-10px);
             border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        /* Fixed: Image only scales when the entire portfolio item is hovered */
+        .portfolio-item:hover  {
+            transform: scale(1.05);
         }
 
         .portfolio-image {
-            width: 100%;
-            aspect-ratio: 4 / 3; /* Or 16 / 9, adjust as needed */
+            flex: 1;
+            max-width: 300px;
+            height: auto;
+            aspect-ratio: auto;
             overflow: hidden;
-            position: relative;
-            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            border-radius: 10px;
         }
 
         .portfolio-image img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
 
         .portfolio-content {
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
+            flex: 2;
+            padding: 1rem 0;
         }
 
         .portfolio-content h3 {
             margin-bottom: 1rem;
-            color: #2c3e50;
+            color: var(--text-light);
         }
 
         .portfolio-content p {
             margin-bottom: 1.5rem;
-            color: #666;
+            color: var(--text-secondary);
         }
 
         .portfolio-link {
-            color: #3498db;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .portfolio-link:hover {
-            color: #2980b9;
+            color: var(--accent-color);
             text-decoration: underline;
         }
 
         /* Certifications Section */
         .certifications {
-            background: var(--background-light);
+            background: rgba(30, 41, 59, 0.5);
         }
 
         .certifications-grid {
@@ -407,20 +396,20 @@
         }
 
         .certification-card {
-            background: white;
+            background: var(--gradient-card);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             display: flex;
             transition: all 0.3s ease;
             align-items: center;
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
         }
 
         .certification-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
 
         .certification-image {
@@ -429,6 +418,9 @@
             object-fit: contain;
             padding: 1rem;
             transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 1rem;
         }
 
         .certification-card:hover .certification-image {
@@ -442,7 +434,7 @@
 
         .certification-content h3 {
             margin-bottom: 0.5rem;
-            color: var(--secondary-color);
+            color: var(--text-light);
         }
 
         .certification-link {
@@ -461,12 +453,12 @@
 
         /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, #2c3e50 0%, #3f5265 100%);
-            color: white;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-light);
         }
 
         .contact .section-title {
-            color: white;
+            color: var(--text-light);
         }
 
         .contact-content {
@@ -478,18 +470,21 @@
 
         .contact-info h3 {
             margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
         .contact-info p {
             margin-bottom: 1rem;
             font-size: 1.1rem;
+            color: var(--text-secondary);
         }
 
         .contact-form {
-            background: rgba(255,255,255,0.1);
+            background: rgba(100, 181, 246, 0.05);
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
         }
 
         .form-group {
@@ -500,16 +495,26 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            color: var(--text-light);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--text-light);
             font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
         }
 
         .form-group textarea {
@@ -518,7 +523,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background: var(--gradient-primary);
             color: white;
             padding: 12px 30px;
             border: none;
@@ -527,19 +532,21 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(100, 181, 246, 0.3);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 12px 30px rgba(100, 181, 246, 0.4);
         }
 
         /* Footer */
         footer {
-            background: #1a252f;
-            color: white;
+            background: #0f172a;
+            color: var(--text-secondary);
             text-align: center;
             padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
         }
 
         /* Responsive Design */
@@ -553,7 +560,14 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+            .portfolio-item {
+                flex-direction: column;
+                text-align: center;
+            }
 
+            .portfolio-image {
+                max-width: 100%;
+            }
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
@@ -658,32 +672,28 @@
                 <div class="skill-category">
                     <h3>Cloud & DevOps</h3>
                     <div class="skill-items">
-                        <span class="skill-item">AWS</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">Kubernetes</span>
-                        <span class="skill-item">Terraform</span>
-                        <span class="skill-item">Jenkins</span>
-                        <span class="skill-item">Ansible</span>
-                        <span class="skill-item">CI/CD</span>
+                        <img src="https://figmaresource.com/wp-content/uploads/2024/05/AWS-Marketplace-Logo-PNG-to-svg-1.svg" alt="AWS" class="skill-icon" title="AWS" />
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" class="skill-icon" title="Docker" />
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="skill-icon" title="Kubernetes" />
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg" alt="Terraform" class="skill-icon" title="Terraform" />
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="skill-icon" title="Jenkins" />
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/ansible/ansible-original.svg" alt="Ansible" class="skill-icon" title="Ansible" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg" alt="GitHub Actions" class="skill-icon" title="GitHub Actions" />
+                        
                     </div>
                 </div>
+            
                 <div class="skill-category">
-                    <h3>Programming</h3>
+                    <h3>Programming and Other Technologies</h3>
                     <div class="skill-items">
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">Bash</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">HTML/CSS</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Other Technologies</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Linux</span>
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">Prometheus</span>
-                        <span class="skill-item">Grafana</span>
-                        <span class="skill-item">ELK Stack</span>
+                        <img src="https://images.ctfassets.net/em6l9zw4tzag/oVfiswjNH7DuCb7qGEBPK/b391db3a1d0d3290b96ce7f6aacb32b0/python.png" alt="Python" class="skill-icon" title="Python" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML" class="skill-icon" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" title="CSS" class="skill-icon" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash" class="skill-icon" title="Bash" style="filter: brightness(0) invert(1);" />
+                        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" title="Linux" />
+                        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git" />
+                        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" title="Prometheus" />
+                        <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" title="Grafana" />
                     </div>
                 </div>
             </div>
@@ -695,7 +705,9 @@
             <h2 class="section-title">My Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="telegram_diagram.jpg" alt="" class="portfolio-image">
+                    <div class="portfolio-image">
+                        <img src="telegram_diagram.jpg" alt="Telegram Bot Diagram">
+                    </div>
                     <div class="portfolio-content">
                         <h3>Telegram Zoom Link Forwarder Bot</h3>
                         <p>A simple Telegram bot that monitors messages for Zoom recording links and forwards them to your personal chat. The bot is deployed as an AWS Lambda function using Terraform and GitHub Actions. Great for students who need to catch up on materials and also organize their review process.</p>
@@ -703,7 +715,9 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="static_web_diagram.png" alt="" class="portfolio-image">
+                    <div class="portfolio-image">
+                        <img src="static_web_diagram.png" alt="Static Website Diagram">
+                    </div>
                     <div class="portfolio-content">
                         <h3>CI-CD for static website</h3>
                         <p>A simple static website hosted on AWS S3 and delivered globally through CloudFront CDN. contains a static website with HTML and CSS, configured with a CI/CD pipeline for automatic deployment to AWS. The website is securely served via HTTPS using AWS services.</p>
@@ -711,10 +725,12 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="image.png" alt="" class="portfolio-image">
+                    <div class="portfolio-image">
+                        <img src="image.png" alt="Video Summary Bot">
+                    </div>
                     <div class="portfolio-content">
                         <h3>Telegram Bot for videos summary</h3>
-                        <p>A Telegram Bot for video summarization is an automated tool designed to receive video files from users, extract key content, and generate concise summaries. The bot interacts with users via Telegram’s API, allowing them to upload videos directly. It then processes the video by extracting audio, transcribing spoken words using AI-powered speech-to-text models, and analyzing the transcript to generate a brief, meaningful summarydirectly within the user Telegram chat.</p>
+                        <p>A Telegram Bot for video summarization is an automated tool designed to receive video files from users, extract key content, and generate concise summaries. The bot interacts with users via Telegram's API, allowing them to upload videos directly. It then processes the video by extracting audio, transcribing spoken words using AI-powered speech-to-text models, and analyzing the transcript to generate a brief, meaningful summary directly within the user Telegram chat.</p>
                         <a href="https://github.com/omerteomim/Summarizing_Telegram_Bot" class="portfolio-link">View Project →</a>
                     </div>
                 </div>
@@ -786,25 +802,7 @@
             <p>&copy; 2025 Omer Teomim. All rights reserved.</p>
         </div>
     </footer>
-
     <script>
-        // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
             // Form submission handler
             const contactForm = document.querySelector('.contact-form');
             if (contactForm) {
@@ -862,75 +860,121 @@
                 });
             }
 
-            // Add scroll effect to header
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                    header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                    header.style.boxShadow = 'none';
+        // Wait for DOM
+        // Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Subtle header scroll effect (optional - remove if not wanted)
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Add animation on scroll for cards
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for scroll animation
+    document.querySelectorAll('.skill-category, .portfolio-item, .card').forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
+    });
+
+    // Portfolio and button hover effects
+    document.querySelectorAll('.portfolio-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
+
+    // Card hover effects
+    document.querySelectorAll('.skill-category, .portfolio-item, .card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+            this.style.transition = 'all 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        });
+    });
+
+    // Button hover effects
+    document.querySelectorAll('.btn, button, .cta-button').forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transition = 'transform 0.2s ease';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"], .nav-links a[href^="#"]');
+
+    if (sections.length > 0 && navLinks.length > 0) {
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
                 }
             });
 
-            // Add animation on scroll for skill cards
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe skill cards and portfolio items for animation
-            document.querySelectorAll('.skill-category, .portfolio-item').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-
-            // Add hover effect to portfolio links
-            document.querySelectorAll('.portfolio-link').forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateX(5px)';
-                });
-                
-                link.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateX(0)';
-                });
-            });
-
-            // Add active navigation highlighting
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
-            window.addEventListener('scroll', function() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= (sectionTop - 200)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
-                        link.classList.add('active');
-                    }
-                });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
         });
+    }
+});
     </script>
 </body>
 </html>
