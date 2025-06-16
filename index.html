@@ -565,8 +565,9 @@
             }
 
             .certification-card {
+                display: flex;
                 flex-direction: column;
-                text-align: center;
+                justify-content: space-between;
             }
             
             .certification-image {
@@ -575,6 +576,17 @@
                 max-width: 200px;
                 margin: 0 auto;
             }
+            .certification-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .submit-btn {
+                margin: 1rem auto 0 auto; /* Top margin, then center horizontally */
+            }
+
         }
 
         @media (max-width: 992px) {
