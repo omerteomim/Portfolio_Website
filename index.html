@@ -380,18 +380,6 @@
             color: var(--text-secondary);
         }
 
-        .portfolio-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-link:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-
         /* Certifications Section */
         .certifications {
             background: rgba(30, 41, 59, 0.5);
@@ -443,22 +431,8 @@
         }
 
         .certification-content h3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 2rem;
             color: var(--text-light);
-        }
-
-        .certification-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .certification-link:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
         }
 
         /* Contact Section */
@@ -535,6 +509,7 @@
         .submit-btn {
             background: var(--gradient-primary);
             color: white;
+            margin: 0 0 0 1rem;
             padding: 12px 30px;
             border: none;
             border-radius: 8px;
@@ -543,12 +518,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(100, 181, 246, 0.3);
+            text-decoration: none;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 30px rgba(100, 181, 246, 0.4);
+            text-decoration: none;
         }
+       
 
         /* Footer */
         footer {
@@ -721,7 +699,7 @@
                     <div class="portfolio-content">
                         <h3>Telegram Zoom Link Forwarder Bot</h3>
                         <p>A simple Telegram bot that monitors messages for Zoom recording links and forwards them to your personal chat. The bot is deployed as an AWS Lambda function using Terraform and GitHub Actions. Great for students who need to catch up on materials and also organize their review process.</p>
-                        <a href="https://github.com/omerteomim/TELEGRAM-BOT" class="portfolio-link">View Project →</a>
+                        <a href="https://github.com/omerteomim/TELEGRAM-BOT" class="submit-btn">View Project</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -731,7 +709,7 @@
                     <div class="portfolio-content">
                         <h3>CI-CD for static website</h3>
                         <p>A simple static website hosted on AWS S3 and delivered globally through CloudFront CDN. contains a static website with HTML and CSS, configured with a CI/CD pipeline for automatic deployment to AWS. The website is securely served via HTTPS using AWS services.</p>
-                        <a href="https://github.com/omerteomim/Static-website" class="portfolio-link">View Project →</a>
+                        <a href="https://github.com/omerteomim/Static-website" class="submit-btn">View Project</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -741,7 +719,7 @@
                     <div class="portfolio-content">
                         <h3>Telegram Bot for videos summary</h3>
                         <p>A Telegram Bot for video summarization is an automated tool designed to receive video files from users, extract key content, and generate concise summaries. The bot interacts with users via Telegram's API, allowing them to upload videos directly. It then processes the video by extracting audio, transcribing spoken words using AI-powered speech-to-text models, and analyzing the transcript to generate a brief, meaningful summary directly within the user Telegram chat.</p>
-                        <a href="https://github.com/omerteomim/Summarizing_Telegram_Bot" class="portfolio-link">View Project →</a>
+                        <a href="https://github.com/omerteomim/Summarizing_Telegram_Bot" class="submit-btn">View Project</a>
                     </div>
                 </div>
             </div>
@@ -756,21 +734,21 @@
                     <img src="https://images.credly.com/size/680x680/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS Solutions Architect" class="certification-image">
                     <div class="certification-content">
                         <h3>AWS Certified Solutions Architect – Associate</h3>
-                        <a href="#" class="certification-link">View Credential</a>
+                        <a href="#" class="submit-btn">View Credential</a>
                     </div>
                 </div>
                 <div class="certification-card">
                     <img src="https://images.credly.com/images/572de0ba-2c59-4816-a59d-b0e1687e45ee/image.png" alt="Red Hat System Administrator" class="certification-image">
                     <div class="certification-content">
                         <h3>Red Hat Certified - System Administrator</h3>
-                        <a href="#" class="certification-link">View Credential</a>
+                        <a href="#" class="submit-btn">View Credential</a>
                     </div>
                 </div>
                 <div class="certification-card">
                     <img src="https://images.credly.com/images/19c4e804-54fe-4857-b022-7cfd5520596c/image.png" alt="Red Hat Engineer" class="certification-image">
                     <div class="certification-content">
                         <h3>Red Hat Certified - Engineer</h3>
-                        <a href="#" class="certification-link">View Credential</a>
+                        <a href="#" class="submit-btn">View Credential</a>
                     </div>
                 </div>
             </div>
@@ -924,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Portfolio and button hover effects
-    document.querySelectorAll('.portfolio-link').forEach(link => {
+    document.querySelectorAll('.submit-btn').forEach(link => {
         link.addEventListener('mouseenter', function() {
             this.style.transform = 'translateX(5px)';
             this.style.transition = 'transform 0.3s ease';
