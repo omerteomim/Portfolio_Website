@@ -103,7 +103,7 @@ resource "aws_api_gateway_rest_api" "contact_form_api" {
 resource "aws_api_gateway_resource" "endpoint" {
   rest_api_id = aws_api_gateway_rest_api.contact_form_api.id
   parent_id   = aws_api_gateway_rest_api.contact_form_api.root_resource_id
-  path_part   = "call"
+  path_part   = "Contact"
 }
 
 # POST method
@@ -136,12 +136,31 @@ resource "aws_lambda_permission" "allow_api_gateway" {
 # Deploy the API
 resource "aws_api_gateway_deployment" "api_deployment" {
   rest_api_id = aws_api_gateway_rest_api.contact_form_api.id
-  stage_name  = "prod"
 
   depends_on = [aws_api_gateway_integration.lambda_integration]
+
+  # This forces redeployment when the API changes
+  triggers = {
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_resource.endpoint.id,
+      aws_api_gateway_method.post_method.id,
+      aws_api_gateway_integration.lambda_integration.id,
+    ]))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# Create the stage separately
+resource "aws_api_gateway_stage" "prod" {
+  deployment_id = aws_api_gateway_deployment.api_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.contact_form_api.id
+  stage_name    = var.environment
 }
 
 output "api_gateway_url" {
   description = "API Gateway URL"
-  value       = "https://${aws_api_gateway_rest_api.contact_form_api.id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_deployment.api_deployment.stage_name}/call"
+  value       = "https://${aws_api_gateway_rest_api.contact_form_api.id}.execute-api.${var.aws_region}.amazonaws.com/${aws_api_gateway_deployment.api_deployment.stage_name}/Contact"
 }
