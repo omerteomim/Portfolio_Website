@@ -78,6 +78,7 @@ jobs:
       - name: Create pages folder
         run: |
           mkdir -p gh-pages
+          mkdir -p gh-pages/images
           cp index.html gh-pages/
           cp Resume.pdf gh-pages/
           cp images/* gh-pages/images/
