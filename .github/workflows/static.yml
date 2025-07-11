@@ -1,43 +1,97 @@
-# Simple workflow for deploying static content to GitHub Pages
+
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
+    
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+      
+      - name: Install dependencies and zip Lambda function
+        run: |
+          mkdir -p package
+          cp lambda_function.py package/
+          cd package
+          zip -r ../lambda_function.zip .
+          cd ..
+      
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+          terraform_wrapper: false
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Terraform Init
+        run: terraform init
+        
+      - name: Terraform Validate
+        run: terraform validate
+      
+      - name: Terraform Plan
+        run: |
+          terraform plan \
+            -var="aws_region=${{ secrets.AWS_REGION }}" \
+            -var="your_email=${{ secrets.MY_MAIL }}" 
+            
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: |
+          terraform apply -auto-approve \
+            -var="aws_region=${{ secrets.AWS_REGION }}"
+            -var="your_email=${{ secrets.MY_MAIL }}"
+
+      - name: Apply API Gateway url to html
+        run: |
+          # Get the URL from Terraform output
+          URL=$(terraform output -raw api_gateway_url 2>&1 | \
+                grep -oP 'https?://[^\s::]*' | \
+                head -n 1 | \
+                tr -d '\n')
+
+          echo "API Gateway URL is: $URL"
+          # Replace the placeholder in index.html
+          sed -i "s|__API_GATEWAY_URL__|$URL|g" index.html
+
+      - name: Create pages folder
+        run: |
+          mkdir -p gh-pages
+          cp index.html gh-pages/
+          cp Resume.pdf gh-pages/
+          cp images/* gh-pages/images/
+
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: gh-pages
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Print GitHub Pages URL
+        run: |
+          echo "🚀 GitHub Pages deployed successfully!"
+          echo "📄 Your site is available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"

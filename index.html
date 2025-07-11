@@ -866,7 +866,7 @@
                     if (!name || !email || !message) {
                         alert('Please fill in all fields.');
                     } 
-                    fetch('https://9r6h6hhuzk.execute-api.us-east-1.amazonaws.com/prod/Contact', {
+                    fetch('__API_GATEWAY_URL__', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
