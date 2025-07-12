@@ -88,8 +88,9 @@ resource "aws_apigatewayv2_api" "http_api" {
   name          = "contact-form-http-api"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_methods     = ["POST"]
+    allow_methods     = ["POST", "OPTIONS"]
     allow_origins     = ["*"]
+    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token"]
   }
 }
 
