@@ -103,7 +103,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
 
 resource "aws_apigatewayv2_route" "contact_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "POST /submit"
+  route_key = "POST /"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
 
