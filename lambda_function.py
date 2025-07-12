@@ -1,7 +1,9 @@
 import json
 import boto3
+import os
 
 sns = boto3.client('sns')
+topic_arn = os.environ['SNS_TOPIC_ARN']
 
 def lambda_handler(event, context):
     cors_headers = {
@@ -10,7 +12,9 @@ def lambda_handler(event, context):
         "Access-Control-Allow-Methods": "POST,OPTIONS"
     }
 
-    if event['httpMethod'] == 'OPTIONS':
+    method = event.get("requestContext", {}).get("http", {}).get("method", "")
+
+    if method == 'OPTIONS':
         return {
             'statusCode': 200,
             'headers': cors_headers,
@@ -18,13 +22,14 @@ def lambda_handler(event, context):
         }
 
     try:
-        body = json.loads(event['body'])
-        name = body.get('name')
-        email = body.get('email')
-        message = body.get('message')
+        body = json.loads(event.get('body', '{}'))
+
+        name = body.get('name', 'N/A')
+        email = body.get('email', 'N/A')
+        message = body.get('message', '')
 
         sns.publish(
-            TopicArn='arn:aws:sns:us-east-1:463470967866:ContactFormSubmissions',
+            TopicArn=topic_arn,
             Subject=f"New contact from {name}",
             Message=f"Name: {name}\nEmail: {email}\nMessage:\n{message}"
         )
