@@ -87,6 +87,10 @@ resource "aws_lambda_function" "contact_form_handler" {
 resource "aws_apigatewayv2_api" "http_api" {
   name          = "contact-form-http-api"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_methods     = ["POST"]
+    allow_origins     = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
