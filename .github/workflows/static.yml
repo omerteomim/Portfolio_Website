@@ -75,17 +75,6 @@ jobs:
           # Replace the placeholder in index.html
           sed -i "s|__API_GATEWAY_URL__|$URL|g" index.html
 
-      - name: html to pdf
-        uses: fifsky/html-to-pdf-action@master
-        with:
-          htmlFile: ./resume.html
-          outputFile: ./Resume.pdf
-          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
-
-      - name: Delete resume.html
-        run: |
-          rm -f resume.html
-
       - name: Create pages folder
         run: |
           mkdir -p gh-pages
