@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
     
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       
@@ -38,7 +38,7 @@ jobs:
           terraform_wrapper: false
       
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -74,6 +74,13 @@ jobs:
           echo "API Gateway URL is: $URL"
           # Replace the placeholder in index.html
           sed -i "s|__API_GATEWAY_URL__|$URL|g" index.html
+
+      - name: html to pdf
+        uses: fifsky/html-to-pdf-action@master
+        with:
+          htmlFile: ./resume.html
+          outputFile: ./Resume.pdf
+          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
 
       - name: Create pages folder
         run: |
