@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omer Teomim - Resume</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.4in;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.35;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 18px;
+            background: white;
+            font-size: 14px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 18px;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            margin: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .header .title {
+            font-size: 17px;
+            color: #7f8c8d;
+            margin: 4px 0 12px 0;
+            font-weight: normal;
+        }
+        
+        .contact-info {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .section {
+            margin-bottom: 22px;
+        }
+        
+        .section h2 {
+            font-size: 17px;
+            color: #2c3e50;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .section p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .skill-category {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .skill-category strong {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .project {
+            margin-bottom: 18px;
+            page-break-inside: avoid;
+        }
+        
+        .project h3 {
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        
+        .project .tech {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        
+        .project ul {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+        
+        .project li {
+            margin-bottom: 6px;
+            text-align: justify;
+            font-size: 13px;
+        }
+        
+        .education-item, .cert-item {
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        
+        .education-item strong, .cert-item strong {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .separator {
+            border-top: 1px solid #ecf0f1;
+            margin: 30px 0;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .project {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Omer Teomim</h1>
+        <div class="title">DevOps Engineer</div>
+        <div class="contact-info">
+            omerteomim@gmail.com | 0544802218 | https://github.com/omerteomim | https://linkedin.com/in/omerteomim
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Professional Summary</h2>
+        <p>DevOps Engineer with expertise in cloud infrastructure, automation, and continuous integration/continuous deployment (CI/CD) pipelines. Proven track record in designing, implementing, and maintaining scalable cloud solutions using AWS services. Strong background in Linux system administration with Red Hat certifications and AWS Solution Architect expertise.</p>
+    </div>
+
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <strong>Cloud Platforms:</strong> Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP)
+            </div>
+            <div class="skill-category">
+                <strong>Containerization & Orchestration:</strong> Docker, Kubernetes
+            </div>
+            <div class="skill-category">
+                <strong>Infrastructure as Code:</strong> Terraform, Ansible
+            </div>
+            <div class="skill-category">
+                <strong>CI/CD Tools:</strong> Jenkins, GitHub Actions, ArgoCD
+            </div>
+            <div class="skill-category">
+                <strong>Monitoring & Logging:</strong> AWS CloudWatch, Prometheus, Grafana
+            </div>
+            <div class="skill-category">
+                <strong>Scripting & Programming:</strong> Bash, Python
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <div class="education-item">
+            <strong>Associate Degree in DevOps Engineering</strong> | Ort Singalovsky | November 2024 - November 2025
+        </div>
+    </div>
+
+    
+    <div class="section">
+        <h2>Certifications</h2>
+        <div class="cert-item">
+            <strong>AWS Certified Solutions Architect - Associate</strong>
+        </div>
+        <div class="cert-item">
+            <strong>Red Hat Certified System Administrator (RHCSA)</strong>
+        </div>
+        <div class="cert-item">
+            <strong>Red Hat Certified Engineer (RHCE)</strong>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Key Projects</h2>
+        
+        <div class="project">
+            <h3>Psychometric essay inspector</h3>
+            <div class="tech">Technologies: AWS S3, AWS Lambda, AWS CloudFront, Github Actions, Terraform, OpenRouterAI</div>
+            <ul>
+                <li>Developed a web application to evaluate and analyze psychometric essays using Deepseek AI models.</li>
+                <li>Deployed a scalable serverless architecture leveraging AWS and IaC for reliable performance.</li>
+            </ul>
+        </div>
+
+        <div class="project">
+            <h3>Telegram Bot for videos summary</h3>
+            <div class="tech">Technologies: AWS S3, AWS Lambda, AWS Rekognition, AWS Comprehend, AWS Transcribe, Github Actions, Terraform, Telegram Bot API</div>
+            <ul>
+                <li>Built a Telegram bot that accepts video uploads, extracts audio, transcribes and summarizes content using AWS ML services.</li>
+                <li>Implemented a cost-efficient, serverless pipeline fully automated via GitHub Actions and Terraform.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
