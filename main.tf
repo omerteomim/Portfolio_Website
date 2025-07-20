@@ -17,19 +17,18 @@ provider "aws" {
   region = var.aws_region
 }
 
-# SNS Topic 
+# SNS Topic for contact form submissions
 resource "aws_sns_topic" "contact_form_submissions" {
   name = "ContactForm"
 }
 
-
+# SNS Topic Subscription
 resource "aws_sns_topic_subscription" "email_notification" {
   topic_arn = aws_sns_topic.contact_form_submissions.arn
   protocol  = "email"
   endpoint  = var.your_email
 }
 
-#Lambda
 resource "aws_iam_role" "lambda_execution_role" {
   name = "contact-form-lambda-role"
 
@@ -85,7 +84,6 @@ resource "aws_lambda_function" "contact_form_handler" {
   }
 }
 
-#API Gateway
 resource "aws_apigatewayv2_api" "http_api" {
   name          = "contact-form-http-api"
   protocol_type = "HTTP"
